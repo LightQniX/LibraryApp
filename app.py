@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, flash, render_template_string, redirect, Response
 import psycopg2
 import json
+import os
 
+
+port = int(os.environ.get('PORT', 5000))
 
 
 dbhost = 'ec2-54-216-17-9.eu-west-1.compute.amazonaws.com'
@@ -74,5 +77,5 @@ def getBookList():
     else:
         return {'library': 'library is empty'}, 404
 
-
-app.run(debug=True, host='localhost', port=5001)
+app.run(threaded=True,host='0.0.0.0', port=port)
+#app.run(debug=True, host='localhost', port=5001)
